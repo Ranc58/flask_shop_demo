@@ -1,0 +1,66 @@
+{% extends "_base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="masthead">
+            <nav>
+              <ul class="nav nav-justified">
+                <li class="active"><a href="#">Описание</a></li>
+                <li><a href="#">Характеристики</a></li>
+                <li><a href="#">Модификации</a></li>
+                <li><a href="#">Цены</a></li>
+                <li><a href="#">Карта</a></li>
+                <li><a href="#">Отзывы</a></li>
+                <li><a href="#">Обзоры</a></li>
+                <li><a href="#">Обсуждения</a></li>
+              </ul>
+            </nav>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="{{ url_for('static', filename='images/') }}{{ product.product_path }}.png" class="text-center" alt="{{ product.product_img_path }}" style="height: 2in">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="btn-group dropup">
+                    {% for color in product.product_color %}
+                    <button type="button" class="btn btn-default">{{ color.product_color }}</button>
+                    {% endfor %}
+                </div>
+                <div>
+                    <span>Объем жесткого диска: </span>
+                    <select>
+                        {% for hdd in product.hdd_value %}
+                        <option>{{ hdd.hdd_value }} Гб</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="thumbnail">
+                    <div class="text-center">
+                        <span>Коротко о товаре:</span>
+                    </div>
+                    <p>Процессор: {{ product.processor_model }}</p>
+                    <p>Частота процессора: {{ product.processor_frequency }}</p>
+                    <p>Объем оперативной памяти: {{ product.ram_value }} Гб</p>
+                    <p>Объем жесткого диска: {% for hdd in product.hdd_value %}
+                    {{ hdd.hdd_value }}{{ ", " if not loop.last }}
+                    {% endfor %}</p>
+                    <p>Размер экрана: {{ product.display_size }}</p>
+                    <p>Видеокарта: {{ product.videocard }}</p>
+                    <p>Вес: {{ product.weight }} кг</p>
+                    <p>Оптический привод: {{ product.optical_drive }}</p>
+                    <p>4G LTE: {{ product.lte_4g }}</p>
+                    <p>Bluetooth: {{ product.bluetooth }}</p>
+                    <p>Wi-Fi: {{ product.wi_fi }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <p>Цена: {{ product.price }} р.</p>
+                    <p>Объем видеопамяти: {{ product.video_memory_value }} Мб</p>
+                    <p>Объем жесткого диска: {{ product.hdd_value[0].hdd_value }} Гб</p>
+                </div>
+            </div>
+        </div>
+{% endblock %}
